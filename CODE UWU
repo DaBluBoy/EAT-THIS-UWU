@@ -1,0 +1,91 @@
+#EAT THIS UWU
+import random
+
+HANGMAN_PICS = ['''
+   +---+
+       |
+       |
+       |
+      ===''', '''
+    +---+
+    O   |
+        |
+        |
+       ===''', '''
+    +---+
+    O   |
+    |   |
+        |
+       ===''', '''
+    +---+
+    O   |
+   /|   |
+        |
+       ===''', '''
+    +---+
+    O   |
+   /|\  |
+        |
+       ===''', '''
+    +---+
+    O   |
+   /|\  |
+   /    |
+       ===''', '''
+    +---+
+    O   |
+   /|\  |
+   / \  |
+       ===''']
+
+def printGameDisplay( game ):
+   
+    newList = []
+    for i in range( len( game ) ):
+        
+        newList.append( game[i] + ' ')
+    
+    print(''.join(newList))
+
+
+wordsToGuess = ['apple', 'banana', 'cranberry', 'dragonfruit', 'elderberry', 'fig', 'grapefruit', 'honeydew', 'pokemon', 'onee-chan', 'boat', ]
+
+
+answerPosition = random.randint(0, len(wordsToGuess) - 1)
+
+answerString = wordsToGuess[ answerPosition ]
+
+answerList = list( answerString )
+
+answerLength = len( answerList )
+
+
+gameDisplay = list( '_'*len(answerList) )
+
+
+print("Welcome to the fruit guessing game!")
+print( "For testing purposes the answer is:", ''.join(answerList))
+
+
+gameStatus = True
+hang = 0
+
+
+while gameStatus == True:
+    userGuess = input("Guess the word or a single letter: ")
+    if userGuess in answerList:
+        print("Correct guess!")
+        for i in range( answerLength ):
+            if userGuess == answerList[i]:
+                gameDisplay[i] = userGuess
+        printGameDisplay(gameDisplay)
+    elif userGuess == (''.join(answerList)):
+        print("your Dad might just come back!!!")
+        gameStatus = False
+    else:
+        print(HANGMAN_PICS[hang])
+        hang = hang + 1 
+        print(hang)
+        if hang == 7:
+            print("You failiure, why did you even try?")
+            gameStatus = False
